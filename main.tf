@@ -1,4 +1,5 @@
 variable "name" {}
+variable "azurerm_resource_group" {}
 variable "vm_size" {
   default = "Standard_D2_v2"
 }
@@ -8,8 +9,8 @@ variable "node_count" {
 
 resource "azurerm_kubernetes_cluster" "main" {
   name                = var.name
-  location            = azurerm_resource_group.main.location
-  resource_group_name = azurerm_resource_group.main.name
+  location            = var.azurerm_resource_group.location
+  resource_group_name = var.azurerm_resource_group.name
   dns_prefix          = var.name
 
   default_node_pool {
