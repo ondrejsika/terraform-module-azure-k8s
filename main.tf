@@ -37,7 +37,8 @@ resource "azurerm_kubernetes_cluster" "main" {
 }
 
 output "azurerm_kubernetes_cluster" {
-  value = azurerm_kubernetes_cluster.main
+  value     = azurerm_kubernetes_cluster.main
+  sensitive = true
 }
 
 output "kubeconfig" {
