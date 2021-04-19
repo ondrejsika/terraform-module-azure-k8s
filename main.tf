@@ -6,12 +6,16 @@ variable "vm_size" {
 variable "node_count" {
   default = 1
 }
+variable "kubernetes_version" {
+  default = null
+}
 
 resource "azurerm_kubernetes_cluster" "main" {
   name                = var.name
   location            = var.azurerm_resource_group.location
   resource_group_name = var.azurerm_resource_group.name
   dns_prefix          = var.name
+  kubernetes_version  = var.kubernetes_version
 
   default_node_pool {
     name       = var.name
