@@ -1,4 +1,10 @@
 variable "name" {}
+variable "vm_size" {
+  default = "Standard_D2_v2"
+}
+variable "node_count" {
+  default = 1
+}
 
 resource "azurerm_kubernetes_cluster" "main" {
   name                = var.name
@@ -8,8 +14,8 @@ resource "azurerm_kubernetes_cluster" "main" {
 
   default_node_pool {
     name       = var.name
-    node_count = 2
-    vm_size    = "Standard_D2_v2"
+    node_count = var.node_count
+    vm_size    = var.vm_size
   }
 
   identity {
