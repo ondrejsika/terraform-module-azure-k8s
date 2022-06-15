@@ -11,11 +11,12 @@ variable "kubernetes_version" {
 }
 
 resource "azurerm_kubernetes_cluster" "main" {
-  name                = var.name
-  location            = var.azurerm_resource_group.location
-  resource_group_name = var.azurerm_resource_group.name
-  dns_prefix          = var.name
-  kubernetes_version  = var.kubernetes_version
+  name                              = var.name
+  location                          = var.azurerm_resource_group.location
+  resource_group_name               = var.azurerm_resource_group.name
+  dns_prefix                        = var.name
+  kubernetes_version                = var.kubernetes_version
+  role_based_access_control_enabled = true
 
   default_node_pool {
     name       = var.name
@@ -33,10 +34,6 @@ resource "azurerm_kubernetes_cluster" "main" {
     dns_service_ip     = "172.100.0.10"
     docker_bridge_cidr = "172.101.0.1/16"
     load_balancer_sku  = "standard"
-  }
-
-  role_based_access_control {
-    enabled = true
   }
 }
 
